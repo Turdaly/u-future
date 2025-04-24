@@ -7,7 +7,7 @@ export const CoutnryAPi = {
     return queryOptions({
       queryKey: [CoutnryAPi.baseKey, "getCountries"],
       queryFn: () => {
-        return apiCall('all')
+        return apiCall<Types.Country[]>('all')
       }
     })
   }

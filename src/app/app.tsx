@@ -1,20 +1,24 @@
-import { useCountries } from "../shared/api/country/use-countries"
-
+import { useCountries } from "../shared/api/country/use-countries";
+import { CountryList } from "../widgets/country-list";
 export function App() {
-  const { countries, isLoading } = useCountries()
-  console.log(countries)
+  const { countries, isLoading } = useCountries();
+  const regions = ["All", "Europe", "Asia", "America", "Africa"];
+  console.log(countries);
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
+  }
+
+  if (!countries) {
+    return <div>No countries found</div>;
   }
   return (
-    <div>JHelo</div>
-    {countries.map((country) => (
-      <div key={country.name.common}>
-        <h1>{country.name.common}</h1>
-        <img src={country.flags.png} alt={country.name.common} />
-      </div>
-    )
-  )
+    <div>
+      <ul>
+        {regions.map((region) => (
+          <li key={region}>{region}</li>
+        ))}
+      </ul>
+      <CountryList countries={countries} />
+    </div>
+  );
 }
-
-
