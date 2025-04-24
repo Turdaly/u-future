@@ -3,12 +3,12 @@ import { apiCall } from "./api";
 
 export const CoutnryAPi = {
   baseKey: "country",
-  getCountriesQueryOptions:() => {
+  getCountriesQueryOptions: () => {
     return queryOptions({
       queryKey: [CoutnryAPi.baseKey, "getCountries"],
       queryFn: () => {
-        return apiCall<Types.Country[]>('all')
-      }
-    })
-  }
-}
+        return apiCall<Types.Country[]>("all");
+      },
+    });
+  },
+};

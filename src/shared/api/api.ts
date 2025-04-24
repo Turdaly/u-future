@@ -31,4 +31,4 @@ export const apiCall = async <T>(
   }
 
   return response.json();
-}
+};

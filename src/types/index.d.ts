@@ -14,7 +14,6 @@ declare global {
       };
       languages: {
         [key: string]: string;
-        [key: string]: string;
       };
     };
     type CountryName = {
@@ -26,6 +25,12 @@ declare global {
           common: string;
         };
       };
+    };
+
+    type Region = {
+      text: string;
+      key: string;
+      icon: string;
     };
   }
 }
