@@ -12,6 +12,7 @@ declare global {
         alt: string;
         [key: string]: string;
       };
+      population: number;
       languages: {
         [key: string]: string;
       };

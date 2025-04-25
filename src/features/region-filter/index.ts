@@ -1,0 +1,1 @@
+export { filterByRegion } from "./model/filter";

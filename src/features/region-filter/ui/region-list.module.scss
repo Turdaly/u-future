@@ -1,15 +1,30 @@
 .menu {
   display: flex;
   list-style: none;
-  padding: 16px 0;
+  padding: 0;
   margin: 0;
   overflow-x: auto;
   white-space: nowrap;
   gap: 24px;
   scroll-behavior: smooth;
+  padding-bottom: 12px; /* Скролл бар үшін орын қосамыз */
+  scrollbar-width: thin; /* Firefox үшін */
+  scrollbar-color: #0c73fe #e0e0e0; /* Firefox үшін: thumb және track түстері */
 
+  /* Webkit браузерлері үшін (Chrome, Safari, Edge) */
   &::-webkit-scrollbar {
-    display: none; // Скроллбарды жасыру
+    height: 6px; /* Биіктігін азайтамыз */
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #e0e0e0; /* Ашықтау фон */
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #0c73fe; /* Бөлектеу түсі - негізгі көк түс */
+    border-radius: 3px;
   }
 
   li {
