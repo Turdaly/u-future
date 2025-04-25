@@ -7,23 +7,22 @@
   white-space: nowrap;
   gap: 24px;
   scroll-behavior: smooth;
-  padding-bottom: 12px; /* Скролл бар үшін орын қосамыз */
-  scrollbar-width: thin; /* Firefox үшін */
-  scrollbar-color: #0c73fe #e0e0e0; /* Firefox үшін: thumb және track түстері */
+  padding-bottom: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #0c73fe #e0e0e0;
 
-  /* Webkit браузерлері үшін (Chrome, Safari, Edge) */
   &::-webkit-scrollbar {
-    height: 6px; /* Биіктігін азайтамыз */
+    height: 6px;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #e0e0e0; /* Ашықтау фон */
+    background: #e0e0e0;
     border-radius: 3px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #0c73fe; /* Бөлектеу түсі - негізгі көк түс */
+    background: #0c73fe; 
     border-radius: 3px;
   }
 

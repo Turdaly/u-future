@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { CoutnryAPi } from "../country-api";
+import { CountryApi } from "../country-api";
 
 export const useCountries = () => {
   const {
     data: countries,
-    isLoading,
+    isLoading: isLoadingGet,
     isError,
-  } = useQuery({ ...CoutnryAPi.getCountriesQueryOptions() });
+  } = useQuery({ ...CountryApi.getCountriesQueryOptions() });
 
   return {
     countries,
-    isLoading,
+    isLoadingGet,
     isError,
   };
 };
