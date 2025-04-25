@@ -9,22 +9,27 @@ import {
   SortOrder,
 } from "../features/population-sort";
 import styles from "./countries-widget.module.scss";
-import { SearchInput } from "../features/country-search";
+import { getSearchTextFromURL, SearchInput } from "../features/country-search";
 import { useSearchCountriesByName } from "../shared/api/country/use-search-coutries";
+import { useLocation } from "react-router";
 
 export const CountriesWidget = () => {
+  const location = useLocation();
+
   const [selectedRegion, setSelectedRegion] = useState("All");
   const [filteredCountries, setFilteredCountries] = useState<Types.Country[]>(
     []
   );
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(
+    getSearchTextFromURL(location.search)
+  );
   const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
 
   const { countries, isLoadingGet } = useCountries();
-  const { searchedCountries, isLoadingSearch } = useSearchCountriesByName(
-    searchQuery.trim()
-  );
+  const { searchedCountries, isLoadingSearch, isError } =
+    useSearchCountriesByName(searchQuery.trim());
   const allCountries = searchQuery.trim() ? searchedCountries : countries;
+
   useEffect(() => {
     if (!allCountries) return;
     const filtered = filterByRegion(allCountries, selectedRegion);
@@ -33,9 +38,10 @@ export const CountriesWidget = () => {
 
     setFilteredCountries(sorted);
   }, [allCountries, selectedRegion, sortOrder]);
-
-
-  if (allCountries?.length === 0) return <div>Not Found</div>;
+  useEffect(() => {
+    const textFromURL = getSearchTextFromURL(location.search);
+    setSearchQuery(textFromURL);
+  }, [location.search]);
 
   return (
     <div className={styles.filtersRow}>
@@ -51,6 +57,7 @@ export const CountriesWidget = () => {
       ) : (
         <CountryList countries={filteredCountries} />
       )}
+      {isError && <div className={styles.error}>Not Found</div>}
     </div>
   );
 };
