@@ -18,8 +18,8 @@ export function RegionList() {
       {regions.map((region) => (
         <li
           key={region.text}
-          className={`${selectedRegion === region.text ? styles.active : ""}`}
-          onClick={() => handleRegionSelect(region.text)}
+          className={`${selectedRegion === region.key ? styles.active : ""}`}
+          onClick={() => handleRegionSelect(region.key)}
         >
           <span
             className={styles.icon}
