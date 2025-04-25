@@ -1,6 +1,7 @@
+import { Country } from "../model/types";
 import styles from "./country-list.module.scss";
 
-export function CountryList({ countries }: { countries: Types.Country[] }) {
+export function CountryList({ countries }: { countries: Country[] }) {
   return (
     <div className={styles.container}>
       {countries.map((country) => (
