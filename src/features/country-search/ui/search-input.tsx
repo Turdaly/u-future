@@ -1,18 +1,29 @@
-import { ChangeEvent, useState } from "react";
-import { SearchInputProps } from "../model/types";
-import styles from "./search-input.module.scss";
+import { ChangeEvent, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { getSearchTextFromURL } from "../model/get-search-url";
+import { setSearchQuery } from "../model/slice";
+import { getSearchTextFromURL } from "../lib/get-search-url";
+import styles from "./search-input.module.scss";
+import { useAppDispatch } from "app/store";
 
-export const SearchInput = ({ setSearchQuery }: SearchInputProps) => {
+export const SearchInput = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useAppDispatch();
+
   const [inputValue, setInputValue] = useState(
     getSearchTextFromURL(location.search)
   );
+
+  useEffect(() => {
+    const textFromURL = getSearchTextFromURL(location.search);
+    dispatch(setSearchQuery(textFromURL));
+  }, []);
+
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSearchQuery(inputValue);
+
+    dispatch(setSearchQuery(inputValue));
+
     if (inputValue) {
       navigate(`/search/?text=${encodeURIComponent(inputValue)}`);
     } else {
@@ -22,9 +33,12 @@ export const SearchInput = ({ setSearchQuery }: SearchInputProps) => {
 
   const handleClear = () => {
     setInputValue("");
-    setSearchQuery("");
+
+    dispatch(setSearchQuery(""));
+
     navigate("/");
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div className={styles.searchContainer}>
@@ -52,13 +66,15 @@ export const SearchInput = ({ setSearchQuery }: SearchInputProps) => {
           onChange={(e) => setInputValue(e.target.value)}
         />
         {inputValue && (
-          <button className={styles.clearButton} onClick={handleClear}>
+          <button
+            type="button"
+            className={styles.clearButton}
+            onClick={handleClear}
+          >
             x
           </button>
         )}
-        <button className={styles.searchButton}>
-          Search
-        </button>
+        <button className={styles.searchButton}>Search</button>
       </div>
     </form>
   );

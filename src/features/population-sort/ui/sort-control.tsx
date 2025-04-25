@@ -1,11 +1,15 @@
-import { SortControlProps } from "../model/types";
+
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { selectSortOrder } from '../model/selector';
+import { setSortOrder } from '../model/slice';
 import styles from "./sort-control.module.scss";
-export const SortControl = ({
-  sortOrder,
-  setSortOrder,
-}: SortControlProps) => {
+
+export const SortControl = () => {
+  const dispatch = useAppDispatch();
+  const sortOrder = useAppSelector(selectSortOrder);
+
   const toggleSort = () => {
-    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    dispatch(setSortOrder(sortOrder === "asc" ? "desc" : "asc"));
   };
 
   return (

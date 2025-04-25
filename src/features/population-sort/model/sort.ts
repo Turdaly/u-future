@@ -1,6 +1,8 @@
+
+import { Country } from "@/entities";
 import { SortOrder } from "./types";
 
-export const sortByPopulation = (countries: Types.Country[], order: SortOrder) => {
+export const sortByPopulation = (countries: Country[], order: SortOrder) => {
   if (!countries) {
     return [];
   }

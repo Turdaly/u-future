@@ -1,3 +1,6 @@
+import { Region } from "./types";
+
+
 export const REGION_ICONS = {
   all: "/public/regions/all.svg",
   eur: "/public/regions/europe.svg",
@@ -7,7 +10,7 @@ export const REGION_ICONS = {
   ocean: "/public/regions/australia.svg",
 };
 
-export const regions: Types.Region[] = [
+export const regions: Region[] = [
   { text: "All", key: "All", icon: REGION_ICONS.all },
   { text: "Europe", key: "Europe", icon: REGION_ICONS.eur },
   { text: "Asia", key: "Asia", icon: REGION_ICONS.asia },
